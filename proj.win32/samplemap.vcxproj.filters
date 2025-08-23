@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\AppDelegate.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\ShapeGameScene.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\proj.win32\main.cpp">
+      <Filter>Source Files\proj.win32</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\cocos2d\cocos\precheader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\AppDelegate.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\ShapeGameScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\proj.win32\main.h">
+      <Filter>Source Files\proj.win32</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\proj.win32\resource.h">
+      <Filter>Source Files\proj.win32</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\CloseNormal.png">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\CloseSelected.png">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\GameIcon.png">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\10_decagon.png">
+      <Filter>Resources\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\3_triangle.png">
+      <Filter>Resources\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\4_square.png">
+      <Filter>Resources\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\5_pentagon.png">
+      <Filter>Resources\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\6_hexagon.png">
+      <Filter>Resources\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\7_heptagon.png">
+      <Filter>Resources\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\8_octagon.png">
+      <Filter>Resources\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\9_nonagon.png">
+      <Filter>Resources\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\fonts\Marker Felt.ttf">
+      <Filter>Resources\fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\fonts\arial.ttf">
+      <Filter>Resources\fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\res\.gitkeep">
+      <Filter>Resources\res</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\proj.win32\game.rc">
+      <Filter>Source Files\proj.win32</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{5A228B23-3FE8-3172-862B-714818A3F114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Item">
+      <UniqueIdentifier>{23380D1E-A277-3421-B65D-3FB8B2375E9E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\fonts">
+      <UniqueIdentifier>{7B711DCE-6144-3B67-B669-B507E87A580F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\res">
+      <UniqueIdentifier>{1AD3E123-9FAB-3042-9B11-88B11136BD0A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{02B69FC2-53A0-39CE-A2AE-291CB9E83BD7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes">
+      <UniqueIdentifier>{1D7FCF8C-0F9F-3709-BFEF-704821955DF3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\proj.win32">
+      <UniqueIdentifier>{DC59DC6B-B457-3C91-9A45-0CB9345F272C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(./gradlew:*)",
+      "Bash(export:*)",
+      "Bash(python3:*)",
+      "Bash(cmake:*)",
+      "Bash(\"/mnt/d/Development/Game/CMake/bin/cmake.exe\" .. -G \"Visual Studio 17 2022\" -A Win32)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

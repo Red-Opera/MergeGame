@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\cocos2d\external\edtaa3func\edtaa3func.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\cocos2d\external\edtaa3func\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{02B69FC2-53A0-39CE-A2AE-291CB9E83BD7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\proj.win32\CMakeFiles\269ec5dcdb7163024a333109b788fc9c\SYNC_RESOURCE-samplemap.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\proj.win32\CMakeFiles\SYNC_RESOURCE-samplemap" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F7D0F524-30C7-396A-94D9-141CA6CF7938}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
