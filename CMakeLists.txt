@@ -61,11 +61,20 @@ endif()
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
+     Classes/ComboSystem.cpp
+     Classes/GameStateManager.cpp
      Classes/ShapeGameScene.cpp
+     Classes/ShapePool.cpp
+     Classes/ShapeSprite.cpp
+
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
+     Classes/ComboSystem.h
+     Classes/GameStateManager.h
      Classes/ShapeGameScene.h
+     Classes/ShapePool.h
+     Classes/ShapeSprite.h
      )
 
 if(ANDROID)

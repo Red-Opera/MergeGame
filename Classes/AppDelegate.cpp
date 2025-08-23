@@ -24,6 +24,7 @@
 
 #include "AppDelegate.h"
 #include "ShapeGameScene.h"
+#include "ShapePool.h"
 
 // #define USE_AUDIO_ENGINE 1
 
@@ -44,6 +45,9 @@ AppDelegate::AppDelegate()
 
 AppDelegate::~AppDelegate() 
 {
+    // ShapePool 정리
+    ShapePool::DestroyInstance();
+    
 #if USE_AUDIO_ENGINE
     AudioEngine::end();
 #endif
@@ -70,7 +74,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = cocos2d::Director::getInstance();
     auto glview = director->getOpenGLView();
-    if(!glview) {
+
+    if(!glview) 
+    {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
         glview = cocos2d::GLViewImpl::createWithRect("Shape Merge", cocos2d::Rect(0, 0, m_designResolutionSize.width, m_designResolutionSize.height));
 #else
@@ -88,16 +94,19 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // Set the design resolution
     glview->setDesignResolutionSize(m_designResolutionSize.width, m_designResolutionSize.height, ResolutionPolicy::NO_BORDER);
     auto frameSize = glview->getFrameSize();
+
     // if the frame's height is larger than the height of medium size.
     if (frameSize.height > m_mediumResolutionSize.height)
     {        
         director->setContentScaleFactor(MIN(m_largeResolutionSize.height/m_designResolutionSize.height, m_largeResolutionSize.width/m_designResolutionSize.width));
     }
+
     // if the frame's height is larger than the height of small size.
     else if (frameSize.height > m_smallResolutionSize.height)
     {        
         director->setContentScaleFactor(MIN(m_mediumResolutionSize.height/m_designResolutionSize.height, m_mediumResolutionSize.width/m_designResolutionSize.width));
     }
+
     // if the frame's height is smaller than the height of medium size.
     else
     {        
@@ -107,7 +116,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = ShapeGameScene::createScene();
+    auto scene = ShapeGameScene::CreateScene();
 
     // run
     director->runWithScene(scene);

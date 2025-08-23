@@ -4,7 +4,19 @@
     <ClCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\AppDelegate.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\ComboSystem.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\GameStateManager.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
     <ClCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\ShapeGameScene.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\ShapePool.cpp">
+      <Filter>Source Files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\ShapeSprite.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
     <ClCompile Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\proj.win32\main.cpp">
@@ -18,7 +30,19 @@
     <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\AppDelegate.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\ComboSystem.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\GameStateManager.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
     <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\ShapeGameScene.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\ShapePool.h">
+      <Filter>Source Files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Classes\ShapeSprite.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\proj.win32\main.h">
@@ -36,29 +60,8 @@
     <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\GameIcon.png">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\10_decagon.png">
-      <Filter>Resources\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\3_triangle.png">
-      <Filter>Resources\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\4_square.png">
-      <Filter>Resources\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\5_pentagon.png">
-      <Filter>Resources\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\6_hexagon.png">
-      <Filter>Resources\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\7_heptagon.png">
-      <Filter>Resources\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\8_octagon.png">
-      <Filter>Resources\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Item\9_nonagon.png">
-      <Filter>Resources\Item</Filter>
+    <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\Sound\MergeSound.wav">
+      <Filter>Resources\Sound</Filter>
     </ClInclude>
     <ClInclude Include="D:\Development\Game\cocos2d-x-4.0\CocosProject\samplemap\Resources\fonts\Marker Felt.ttf">
       <Filter>Resources\fonts</Filter>
@@ -82,8 +85,8 @@
     <Filter Include="Resources">
       <UniqueIdentifier>{46D95EFB-54EE-3BAB-A797-6D66C3BC8AEB}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Item">
-      <UniqueIdentifier>{E62C8A43-8327-33F3-84DF-4D1FAF312C5E}</UniqueIdentifier>
+    <Filter Include="Resources\Sound">
+      <UniqueIdentifier>{14A0BA84-392D-312A-B838-A3A615360C0B}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources\fonts">
       <UniqueIdentifier>{E8A7D527-F16F-3744-90CD-B9227BACA0C1}</UniqueIdentifier>
