@@ -22,11 +22,12 @@ public:
     bool IsComboActive() const { return comboCount >= 2; }
     
 private:
+    cocos2d::Label* comboLabel;
+    cocos2d::Node* parentNode;
+
     int comboCount;
     float lastMergeTime;
     float comboTimeWindow;
-    cocos2d::Label* comboLabel;
-    cocos2d::Node* parentNode;
     
     float getCurrentTime() const;
 };

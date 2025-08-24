@@ -18,7 +18,7 @@ ShapePool::~ShapePool()
 
 ShapePool* ShapePool::GetInstance()
 {
-    if (!instance)
+    if (instance == nullptr)
         instance = new ShapePool();
     
     return instance;
@@ -26,7 +26,7 @@ ShapePool* ShapePool::GetInstance()
 
 void ShapePool::DestroyInstance()
 {
-    if (instance)
+    if (instance != nullptr)
     {
         delete instance;
 
@@ -43,7 +43,7 @@ void ShapePool::Initialize(int initialPoolSize)
     {
         ShapeSprite* shape = CreateNewShape();
 
-        if (shape)
+        if (shape != nullptr)
             availableShapes.push(shape);
     }
     
@@ -80,7 +80,7 @@ ShapeSprite* ShapePool::CreateNewShape()
 {
     ShapeSprite* shape = ShapeSprite::Create(3); // 기본 3각형으로 생성
 
-    if (shape)
+    if (shape != nullptr)
     {
         shape->retain(); // 풀에서 관리하므로 retain
         shape->setVisible(false); // 풀에 있을 때는 보이지 않게
@@ -95,7 +95,7 @@ ShapeSprite* ShapePool::CreateNewShape()
 
 void ShapePool::ResetShape(ShapeSprite* shape, int level, const cocos2d::Vec2& position)
 {
-    if (!shape) 
+    if (shape == nullptr) 
         return;
     
     // 도형의 레벨과 외관 재설정

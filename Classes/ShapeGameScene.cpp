@@ -3,6 +3,8 @@
 #include "ShapeSprite.h"
 #include "ComboSystem.h"
 #include "GameStateManager.h"
+#include "audio/include/AudioEngine.h"
+#include <cassert>
 
 USING_NS_CC;
 
@@ -12,13 +14,13 @@ const float ShapeGameScene::BOX_WALL_THICKNESS = 10.0f;
 
 ShapeGameScene::~ShapeGameScene()
 {
-    if (comboSystem)
+    if (comboSystem != nullptr)
     {
         delete comboSystem;
         comboSystem = nullptr;
     }
     
-    if (gameStateManager)
+    if (gameStateManager != nullptr)
     {
         delete gameStateManager;
         gameStateManager = nullptr;
@@ -93,6 +95,13 @@ bool ShapeGameScene::init()
     
     scheduleUpdate();
     
+    // 사운드 엔진 초기화 및 파일 미리 로드
+    this->schedule([this](float dt) 
+    {
+        cocos2d::AudioEngine::preload("Sound/MergeSound.mp3");
+        this->unschedule("preload_audio");
+    }, 0.1f, 0, 0.0f, "preload_audio");
+    
     return true;
 }
 
@@ -119,13 +128,17 @@ void ShapeGameScene::CreateGameBox()
     boxDrawNode = DrawNode::create();
     this->addChild(boxDrawNode);
     
-    Vec2 boxRect[4];
-    boxRect[0] = Vec2(boxCenter.x - boxSize.width/2, boxCenter.y - boxSize.height/2);
-    boxRect[1] = Vec2(boxCenter.x + boxSize.width/2, boxCenter.y - boxSize.height/2);
-    boxRect[2] = Vec2(boxCenter.x + boxSize.width/2, boxCenter.y + boxSize.height/2);
-    boxRect[3] = Vec2(boxCenter.x - boxSize.width/2, boxCenter.y + boxSize.height/2);
+    // 박스 테두리를 개별 라인으로 그리기
+    Vec2 bottomLeft = Vec2(boxCenter.x - boxSize.width/2, boxCenter.y - boxSize.height/2);
+    Vec2 bottomRight = Vec2(boxCenter.x + boxSize.width/2, boxCenter.y - boxSize.height/2);
+    Vec2 topRight = Vec2(boxCenter.x + boxSize.width/2, boxCenter.y + boxSize.height/2);
+    Vec2 topLeft = Vec2(boxCenter.x - boxSize.width/2, boxCenter.y + boxSize.height/2);
     
-    boxDrawNode->drawPoly(boxRect, 4, false, Color4F::WHITE);
+    // 각 테두리를 개별적으로 그리기
+    boxDrawNode->drawLine(bottomLeft, bottomRight, Color4F::WHITE);  // 아래쪽
+    boxDrawNode->drawLine(bottomRight, topRight, Color4F::WHITE);    // 오른쪽
+    boxDrawNode->drawLine(topRight, topLeft, Color4F::WHITE);        // 위쪽
+    boxDrawNode->drawLine(topLeft, bottomLeft, Color4F::WHITE);      // 왼쪽
     
     auto leftWall = Node::create();
     auto leftWallBody = PhysicsBody::createBox(Size(BOX_WALL_THICKNESS, boxSize.height));
@@ -181,19 +194,19 @@ void ShapeGameScene::CreateScoreUI()
 
 void ShapeGameScene::AddScore(int points)
 {
+    assert(points >= 0 && "Error (Score Error) : 점수가 음수입니다.");
+    
     score += points;
     UpdateScoreDisplay();
-    
-    CCLOG("Score added: %d, Total score: %d", points, score);
 }
 
 void ShapeGameScene::UpdateScoreDisplay()
 {
-    if (scoreLabel)
-    {
-        std::string scoreText = "Score: " + std::to_string(score);
-        scoreLabel->setString(scoreText);
-    }
+    assert(scoreLabel != nullptr, "Error (Reference Error) : 점수 라벨이 참조되지 않았습니다.");
+
+
+    std::string scoreText = "Score: " + std::to_string(score);
+    scoreLabel->setString(scoreText);
 }
 
 void ShapeGameScene::LoadBestScore()
@@ -210,11 +223,10 @@ void ShapeGameScene::SaveBestScore()
 
 void ShapeGameScene::UpdateBestScoreDisplay()
 {
-    if (bestScoreLabel)
-    {
-        std::string bestScoreText = "Best: " + std::to_string(bestScore);
-        bestScoreLabel->setString(bestScoreText);
-    }
+    assert(bestScoreLabel != nullptr && "Error (Reference Error) : 베스트 스코어 라벨이 참조되지 않았습니다.");
+
+    std::string bestScoreText = "Best: " + std::to_string(bestScore);
+    bestScoreLabel->setString(bestScoreText);
 }
 
 bool ShapeGameScene::IsSpaceAvailable(const Vec2& position)
@@ -276,7 +288,7 @@ void ShapeGameScene::AddRandomShape()
     
     auto shape = ShapePool::GetInstance()->GetShape(level, position);
 
-    if (shape)
+    if (shape != nullptr)
     {
         this->addChild(shape);
         shapes.push_back(shape);
@@ -324,27 +336,27 @@ bool ShapeGameScene::OnContactBegin(cocos2d::PhysicsContact& contact)
 
 void ShapeGameScene::MergeShapes(ShapeSprite* shape1, ShapeSprite* shape2)
 {
-    if (!shape1 || !shape2) 
-        return;
+    assert(shape1 != nullptr && "Error (Reference Error) : 첫 번째 도형이 참조되지 않았습니다.");
+    assert(shape2 != nullptr && "Error (Reference Error) : 두 번째 도형이 참조되지 않았습니다.");
 
     if (!shape1->getParent() || !shape2->getParent())
         return;
 
-    if (!shape1->getPhysicsBody() || !shape2->getPhysicsBody()) 
-        return;
-    
+    assert(shape1->getPhysicsBody() != nullptr && "Error (Physics Error) : 첫 번째 도형의 물리 바디가 없습니다.");
+    assert(shape2->getPhysicsBody() != nullptr && "Error (Physics Error) : 두 번째 도형의 물리 바디가 없습니다.");
+
     // Double check that shapes are still in our container
     auto it1 = std::find(shapes.begin(), shapes.end(), shape1);
     auto it2 = std::find(shapes.begin(), shapes.end(), shape2);
-    
-    if (it1 == shapes.end() || it2 == shapes.end()) 
+
+    if (it1 == shapes.end() || it2 == shapes.end())
         return;
-    
+
     int newLevel = shape1->GetLevel() + 1; // 레벨 기반 계산
     float newScale = 1.0f;
-    
+
     // 30레벨을 넘어서면 크기로 구분 (무한 확장)
-    if (newLevel > 30) 
+    if (newLevel > 30)
     {
         // 31레벨부터는 크기를 증가시켜서 구분
         float scale1 = shape1->GetShapeScale();
@@ -352,60 +364,63 @@ void ShapeGameScene::MergeShapes(ShapeSprite* shape1, ShapeSprite* shape2)
 
         newScale = (scale1 + scale2) * 0.55f; // 점진적 크기 증가
     }
-    
+
     // Calculate merge position as the midpoint between the two shapes
     Vec2 mergePos = (shape1->getPosition() + shape2->getPosition()) * 0.5f;
-    
+
     // Store the velocity of the shapes to apply to the new merged shape
     Vec2 velocity1 = shape1->getPhysicsBody()->getVelocity();
     Vec2 velocity2 = shape2->getPhysicsBody()->getVelocity();
     Vec2 averageVelocity = (velocity1 + velocity2) * 0.5f;
-    
+
     // Remove from vector using erase-remove idiom
     shapes.erase(std::remove(shapes.begin(), shapes.end(), shape1), shapes.end());
     shapes.erase(std::remove(shapes.begin(), shapes.end(), shape2), shapes.end());
-    
+
     // 기존 도형들을 풀로 반환
     ShapePool::GetInstance()->ReturnShape(shape1);
     ShapePool::GetInstance()->ReturnShape(shape2);
-    
+
     // Create new shape at the merge position using pool
     auto newShape = ShapePool::GetInstance()->GetShape(newLevel, mergePos);
 
-    if (newShape)
+    assert(newShape != nullptr && "Error (Pool Error) : 풀에서 새 도형을 생성할 수 없습니다.");
+
+    // 30레벨 이후 스케일 적용
+    if (newLevel > 30)
     {
-        // 30레벨 이후 스케일 적용
-        if (newLevel > 30)
-        {
-            newShape->SetShapeScale(newScale);
-            newShape->CreateShapeTexture();
-            newShape->SetupPhysicsBody();
-        }
-        
-        this->addChild(newShape);
-        
-        // Apply the average velocity to the new shape for more natural physics
-        newShape->getPhysicsBody()->setVelocity(averageVelocity * 0.8f); // Slight dampening
-        
-        shapes.push_back(newShape);
+        newShape->SetShapeScale(newScale);
+        newShape->CreateShapeTexture();
+        newShape->SetupPhysicsBody();
     }
-    
+
+    this->addChild(newShape);
+
+    // Apply the average velocity to the new shape for more natural physics
+    newShape->getPhysicsBody()->setVelocity(averageVelocity * 0.8f); // Slight dampening
+
+    shapes.push_back(newShape);
+
     // 콤보 업데이트
     comboSystem->Update();
-    
+
+    // 합치기 사운드 재생
+    auto audioId = cocos2d::AudioEngine::play2d("Sound/MergeSound.mp3", false, 1.0f);
+
+    // 파일을 찾을 수 없으면 다른 경로로 시도
+    if (audioId == cocos2d::AudioEngine::INVALID_AUDIO_ID)
+        audioId = cocos2d::AudioEngine::play2d("Resources/Sound/MergeSound.mp3", false, 1.0f);
+
     // 레벨에 따른 점수 획득 (무한 확장 가능)
     int baseScore = newLevel;
     int bonusScore = comboSystem->CalculateBonus(baseScore);
 
     AddScore(baseScore + bonusScore);
-    
-    CCLOG("Base score: %d, Combo: %d, Bonus: %d, Total: %d", baseScore, comboSystem->GetComboCount(), bonusScore, baseScore + bonusScore);
 }
 
 void ShapeGameScene::OnAcceleration(cocos2d::Acceleration* acc, cocos2d::Event* event)
 {
-    // 디버깅을 위한 가속도계 값 출력
-    CCLOG("Acceleration: x=%.3f, y=%.3f, z=%.3f", acc->x, acc->y, acc->z);
+    assert(acc != nullptr && "Error (Reference Error) : 가속도 데이터가 참조되지 않았습니다.");
     
     float gravityStrength = 500.0f;
     
@@ -415,12 +430,8 @@ void ShapeGameScene::OnAcceleration(cocos2d::Acceleration* acc, cocos2d::Event* 
     
     Vec2 gravity = Vec2(gravityX, gravityY);
     
-    if (world)
-    {
-        world->setGravity(gravity);
-    }
-    
-    CCLOG("Applied gravity: x=%.1f, y=%.1f", gravity.x, gravity.y);
+    assert(world != nullptr && "Error (Reference Error) : 물리 월드가 참조되지 않았습니다.");
+    world->setGravity(gravity);
     
     // Optional: Add shake detection for extra effects (주석 처리)
     /*
@@ -443,6 +454,8 @@ void ShapeGameScene::OnAcceleration(cocos2d::Acceleration* acc, cocos2d::Event* 
 
 void ShapeGameScene::AddShapeAtPosition(const Vec2& position)
 {
+    assert(gameStateManager != nullptr && "Error (Reference Error) : 게임 상태 관리자가 참조되지 않았습니다.");
+    
     // 게임 오버 상태면 아무것도 하지 않음
     if (gameStateManager->IsGameOver())
         return; 
@@ -467,8 +480,10 @@ void ShapeGameScene::AddShapeAtPosition(const Vec2& position)
         if (score > bestScore)
         {
             bestScore = score;
+
             SaveBestScore();
             UpdateBestScoreDisplay();
+
             isNewRecord = true;
         }
 
@@ -480,6 +495,8 @@ void ShapeGameScene::AddShapeAtPosition(const Vec2& position)
     // Always create a triangle (level 3) when player touches
     auto shape = ShapePool::GetInstance()->GetShape(3, position);
 
+    assert(shape != nullptr && "Error (Pool Error) : 풀에서 삼각형을 생성할 수 없습니다.");
+    
     if (shape)
     {
         this->addChild(shape);

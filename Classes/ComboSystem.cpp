@@ -20,6 +20,7 @@ ComboSystem::~ComboSystem()
 void ComboSystem::Initialize(const Vec2& labelPosition)
 {
     comboLabel = Label::createWithSystemFont("", "Arial", 32);
+
     comboLabel->setColor(Color3B::ORANGE);
     comboLabel->setPosition(labelPosition);
     comboLabel->setVisible(false);
